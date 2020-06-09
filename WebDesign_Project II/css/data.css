@@ -74,9 +74,13 @@ body {
   
   #new {
     background-color: white;
-    height: 10450px;
+    height: 10750px;
     width: 1550px;
     margin-left:40px;
     margin-right:40px;
     margin-bottom:60px;
+  }
+
+  .addbody{
+    color:white;
   }
