@@ -28,9 +28,9 @@
       var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
         .key(function(d) { return d.Date.split("/")[1];})
         .rollup(function(d) {
-          q1 = d3.quantile(d.map(function(g) { return g.Ave_duration;}).sort(d3.ascending),.25)
-          median = d3.quantile(d.map(function(g) { return g.Ave_duration;}).sort(d3.ascending),.5)
-          q3 = d3.quantile(d.map(function(g) { return g.Ave_duration;}).sort(d3.ascending),.75)
+          q1 = d3.quantile(d.map(function(g) { return g.Ave_duration/60;}).sort(d3.ascending),.25)
+          median = d3.quantile(d.map(function(g) { return g.Ave_duration/60;}).sort(d3.ascending),.5)
+          q3 = d3.quantile(d.map(function(g) { return g.Ave_duration/60;}).sort(d3.ascending),.75)
           interQuantileRange = q3 - q1
           min = q1 - 1.5 * interQuantileRange
           max = q3 + 1.5 * interQuantileRange
@@ -50,7 +50,7 @@
     
       // Show the Y scale
       var y = d3.scaleLinear()
-        .domain([min,max])
+        .domain([0,50])
         .range([height, 0])
       svg.append("g").call(d3.axisLeft(y))
     
@@ -68,7 +68,7 @@
           .style("width", 40)
     
       // rectangle for the main box
-      var boxWidth = 100
+      var boxWidth = 30
       svg
         .selectAll("boxes")
         .data(sumstat)
@@ -93,6 +93,7 @@
           .attr("y2", function(d){return(y(d.value.median))})
           .attr("stroke", "black")
           .style("width", 80)
+
     })
     
     </script>
